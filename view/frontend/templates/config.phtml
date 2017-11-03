@@ -1,0 +1,97 @@
+<?php 
+/**
+* BSS Commerce Co.
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the EULA
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://bsscommerce.com/Bss-Commerce-License.txt
+*
+* =================================================================
+*                 MAGENTO EDITION USAGE NOTICE
+* =================================================================
+* This package designed for Magento COMMUNITY edition
+* BSS Commerce does not guarantee correct work of this extension
+* on any other Magento edition except Magento COMMUNITY edition.
+* BSS Commerce does not provide extension support in case of
+* incorrect edition usage.
+* =================================================================
+*
+* @category   BSS
+* @package    Bss_Quickview
+* @author     Extension Team
+* @copyright  Copyright (c) 2015-2016 BSS Commerce Co. ( http://bsscommerce.com )
+* @license    http://bsscommerce.com/Bss-Commerce-License.txt
+*/
+?>
+<?php
+$helper = $this->helper('Bss\Quickview\Helper\Data');
+$btnTextColor = $helper->getBtnTextColor();
+$baseUrl = $helper->getBaseUrl();
+$buttonText = $helper->getButtonText();
+$btnBackground = $helper->getBtnBackground();
+list($r, $g, $b) = sscanf($btnBackground, "%02x%02x%02x");
+$productUrl = $helper->getUrl();
+$buttonText = $helper->getButtonText();
+$isEnabled = $helper->enabled();
+?>
+
+<style>
+    a.bss-quickview{
+        color: #<?php echo $btnTextColor; ?>;
+        background-color: rgba(<?php echo "$r , $g , $b"; ?>,0.6);
+    }
+    a.bss-quickview {
+        position: absolute;
+        display: block;
+        bottom: 0px;
+        padding: 3px 10px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        }
+    .widget .products-grid .product-item .product-item-info:hover .bss-quickview{
+        display: block !important;
+        position: absolute !important;
+        bottom: 0px !important;
+        left: 0px !important;
+        margin: 0;
+        z-index: 99999999999999 !important;
+        width: 100% !important;
+        padding: 10px 0 10px 0;
+        text-align: center !important;
+        font-size: 14px !important;
+        text-decoration: none !important;
+    }
+
+    .page-products .products-grid .product-item .product-item-info:hover .bss-quickview{
+        display: block !important;
+        position: absolute !important;
+        bottom: 0px !important;
+        left: 0px !important;
+        margin: 0;
+        z-index: 99999999999999 !important;
+        width: 100% !important;
+        padding: 10px 0 10px 0;
+        text-align: center !important;
+        font-size: 14px !important;
+        text-decoration: none !important;
+    }
+    .product-item .bss-quickview {display: none !important}
+    #shopping-cart-table .bss-quickview {display: none !important}
+</style>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Bss_Quickview/js/bss_config": {
+                "productUrl": "<?php echo $productUrl; ?>",
+                "buttonText": "<?php echo $buttonText; ?>",
+                "isEnabled": "<?php echo $isEnabled; ?>",
+                "baseUrl": "<?php echo $baseUrl; ?>"
+            }
+        }
+    }
+</script>
