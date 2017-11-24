@@ -1,6 +1,6 @@
 define([
     'jquery',
-    'Bss_Quickview/js/jquery.fancybox'
+    'Bss_Quickview/js/jquery.magnific-popup.min'
 ], function ($) {
     $.widget('bss.bss_config', {
         _create: function () {
@@ -46,32 +46,29 @@ define([
                             return false;
                         }
                         var url = baseUrl + 'bss_quickview/index/updatecart';
-                        $.fancybox.open({
-                            padding : 10,
-                            href: prodUrl,
+
+                        $.magnificPopup.open({
+                            items: {
+                              src: prodUrl
+                            },
                             type: 'iframe',
-                            autoCenter: false,
-                            autoSize: false,
-                            autoWidth: true,
-                            helpers: {
-                                overlay: {
-                                    locked: false
+                            closeOnBgClick: false,
+                            preloader: true,
+                            tLoading: '',
+                            callbacks: {
+                                open: function() {
+                                  $('.mfp-preloader').css('display', 'block');
+                                },
+                                beforeClose: function() {
+                                    $('[data-block="minicart"]').trigger('contentLoading');
+                                    $.ajax({
+                                        url: url,
+                                        method: "POST"
+                                    });
+                                },
+                                close: function() {
+                                  $('.mfp-preloader').css('display', 'none');
                                 }
-                            },
-                            afterLoad: function () {
-                                this.height = $(this.element).data("height");
-                                var id = $('.fancybox-type-iframe iframe').prop('id');
-                                var height = document.getElementById(id).contentWindow.document.body.scrollHeight + 25;
-                                var maxHeight = parseInt($(window).height() * 95 / 100);
-                                height = (height > maxHeight) ? maxHeight : height;
-                                this.height = height + 'px';
-                            },
-                            beforeClose: function () {
-                                $('[data-block="minicart"]').trigger('contentLoading');
-                                $.ajax({
-                                    url: url,
-                                    method: "POST"
-                                  });
                             }
                         });
                     }
