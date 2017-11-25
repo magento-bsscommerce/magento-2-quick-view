@@ -53,11 +53,13 @@ define([
                             },
                             type: 'iframe',
                             closeOnBgClick: false,
+                            scrolling: false,
                             preloader: true,
                             tLoading: '',
                             callbacks: {
                                 open: function() {
                                   $('.mfp-preloader').css('display', 'block');
+                                  $("iframe.mfp-iframe").contents().find("html").addClass("bss_loader");
                                 },
                                 beforeClose: function() {
                                     $('[data-block="minicart"]').trigger('contentLoading');

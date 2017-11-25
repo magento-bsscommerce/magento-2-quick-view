@@ -30,6 +30,15 @@
   padding: 0 8px;
   box-sizing: border-box; }
 
+body.bss-quickview-catalog-product-view::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+body.bss-quickview-catalog-product-view {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-hidden;
+  padding: 10px;
+}
 .mfp-container:before {
   content: '';
   display: inline-block;
