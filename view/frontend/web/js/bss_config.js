@@ -21,7 +21,6 @@ define([
                     if ($(this).parents('.product-item-info').find('.actions-primary input[name="product"]').val() !='') {
                         id_product = $(this).parents('.product-item-info').find('.actions-primary input[name="product"]').val();
                     }
-                    console.log(id_product);
                     if (!id_product) {
                         id_product = $(this).parents('.product-item-info').find('.price-box').data('product-id');
                     }
