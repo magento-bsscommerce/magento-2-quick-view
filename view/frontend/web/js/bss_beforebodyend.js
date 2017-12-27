@@ -10,7 +10,7 @@ define([
             var showMoreInfo = options.removeMoreInfo;
             $(document).ready(function() {
 
-                var documentPadding = 50;
+                var documentPadding = 10;
                 var firstAttempt = true;
                 var lastHeight = 0, curHeight = 0;
 
@@ -25,10 +25,11 @@ define([
 
                 setInterval(function(){
                     if (firstAttempt) {
-                        curHeight =  $('.page-wrapper').outerHeight(true) + documentPadding;
+                        curHeight =  $('.page-wrapper .columns').outerHeight(true) + documentPadding;
                     } else {
-                        curHeight =  $('.page-wrapper').outerHeight(true);
+                        curHeight =  $('.page-wrapper .columns').outerHeight(true);
                     }
+                    console.log(curHeight);
                     documentHeight =  curHeight + "px";
                     if ( curHeight != lastHeight ) {
                         $('.mfp-iframe-holder .mfp-content', parentBody).animate({
