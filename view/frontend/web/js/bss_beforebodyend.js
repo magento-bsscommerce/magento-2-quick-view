@@ -29,7 +29,6 @@ define([
                     } else {
                         curHeight =  $('.page-wrapper .columns').outerHeight(true);
                     }
-                    console.log(curHeight);
                     documentHeight =  curHeight + "px";
                     if ( curHeight != lastHeight ) {
                         $('.mfp-iframe-holder .mfp-content', parentBody).animate({
