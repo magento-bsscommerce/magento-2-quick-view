@@ -48,7 +48,11 @@
                 <button_text_color>FFFFFF</button_text_color>
                 <button_text>Quick View</button_text>
                 <background_color>001E82</background_color>
-            </success_popup_design>                   
+            </success_popup_design>
+            <seting_theme>
+                <product_item_info>product-item-info</product_item_info>
+                <product_image_wrapper>product-image-wrapper</product_image_wrapper>
+            </seting_theme>                  
         </bss_quickview>      
     </default>
 </config>
