@@ -36,6 +36,8 @@ list($r, $g, $b) = sscanf($btnBackground, "%02x%02x%02x");
 $productUrl = $helper->getUrl();
 $buttonText = $helper->getButtonText();
 $isEnabled = $helper->enabled();
+$productItemInfo = $helper->getProductItemInfo();
+$productImageWrapper = $helper->getProductImageWrapper();
 ?>
 
 <style>
@@ -90,7 +92,9 @@ $isEnabled = $helper->enabled();
                 "productUrl": "<?php echo $productUrl; ?>",
                 "buttonText": "<?php echo $buttonText; ?>",
                 "isEnabled": "<?php echo $isEnabled; ?>",
-                "baseUrl": "<?php echo $baseUrl; ?>"
+                "baseUrl": "<?php echo $baseUrl; ?>",
+                "productItemInfo": "<?php echo $productItemInfo; ?>",
+                "productImageWrapper": "<?php echo $productImageWrapper; ?>"
             }
         }
     }

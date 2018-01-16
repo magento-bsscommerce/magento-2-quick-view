@@ -9,6 +9,8 @@ define([
             var buttonText = options.buttonText;
             var isEnabled = options.isEnabled;
             var baseUrl = options.baseUrl;
+            var productImageWrapper = '.' + options.productImageWrapper;
+            var productItemInfo = '.' + options.productItemInfo;
             if(isEnabled == 1){
                 $('a.mailto').click(function(e){
                     e.preventDefault();
@@ -16,13 +18,13 @@ define([
                     return true;
                 });
 
-                $('.product-image-wrapper').each(function(){
+                $(productImageWrapper).each(function(){
                    
-                    if ($(this).parents('.product-item-info').find('.actions-primary input[name="product"]').val() !='') {
-                        id_product = $(this).parents('.product-item-info').find('.actions-primary input[name="product"]').val();
+                    if ($(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val() !='') {
+                        id_product = $(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val();
                     }
                     if (!id_product) {
-                        id_product = $(this).parents('.product-item-info').find('.price-box').data('product-id');
+                        id_product = $(this).parents(productItemInfo).find('.price-box').data('product-id');
                     }
                     if (id_product) {
                         $(this).append('<div id="quickview"><a class="bss-quickview" data-quickview-url="'+productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+buttonText+'</span></a></div>');

@@ -34,11 +34,19 @@ namespace Bss\Quickview\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
     protected $scopeConfig;
+
     /**
      * @var array
      */
     protected $quickviewOptions;
+
     protected $urlInterface;
+
+    /**
+     * @var string
+     */
+    public $scopeStore = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+
     /**
      * Data constructor.
      * @param \Magento\Framework\App\Helper\Context $context
@@ -143,5 +151,26 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $this->quickviewOptions = $this->scopeConfig->getValue('bss_quickview', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
         return trim($this->quickviewOptions['general']['close_quickview']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductImageWrapper()
+    {
+        $result = $this->scopeConfig->getValue('bss_quickview/seting_theme/product_image_wrapper', $this->scopeStore);
+        if ($result == null) {
+            $result == 'product-image-wrapper';
+        }
+        return $result;
+    }
+
+    public function getProductItemInfo()
+    {
+        $result = $this->scopeConfig->getValue('bss_quickview/seting_theme/product_item_info', $this->scopeStore);
+        if ($result == null) {
+            $result == 'product-item-info';
+        }
+        return $result;
     }
 }
