@@ -20,7 +20,7 @@ define([
             });
 
             $(document).ready(function() {
-                $('.bss-quickview').bind('click', function() {
+                $(document).on('click', '.bss-quickview', function() {
                     var prodUrl = $(this).attr('data-quickview-url');
                     if (prodUrl.length) {
                         $widget.openPopup(prodUrl);
