@@ -77,7 +77,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $buttonText = $this->scopeConfig->getValue('bss_quickview/success_popup_design/button_text', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
-        $buttonText = ($buttonText == '') ? '' : $buttonText;
+        $buttonText = ($buttonText == '') ? __('Quick View') : $buttonText;
         return $buttonText;
     }
     public function enabled()
@@ -160,7 +160,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $result = $this->scopeConfig->getValue('bss_quickview/seting_theme/product_image_wrapper', $this->scopeStore);
         if ($result == null) {
-            $result == 'product-image-wrapper';
+            $result = 'product-image-wrapper';
         }
         return $result;
     }
@@ -169,7 +169,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $result = $this->scopeConfig->getValue('bss_quickview/seting_theme/product_item_info', $this->scopeStore);
         if ($result == null) {
-            $result == 'product-item-info';
+            $result = 'product-item-info';
         }
         return $result;
     }
