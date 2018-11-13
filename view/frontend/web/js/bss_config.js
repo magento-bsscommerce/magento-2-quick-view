@@ -9,17 +9,22 @@ define([
                 this.addQuickviewButton();
                 this.eventListener(this);
             }
-                
+
         },
         eventListener: function ($widget) {
             var baseUrl = this.options.baseUrl;
             $('a.mailto').click(function(e){
                 e.preventDefault();
-                window.top.location.href = $(this).attr('href');    
+                window.top.location.href = $(this).attr('href');
                 return true;
             });
 
             $(document).ready(function() {
+                $(document).on('click', '.message-success a', function (e) {
+                    e.preventDefault();
+                    window.top.location.href = $(this).attr('href');
+                    return true;
+                });
                 $(document).on('click', '.bss-quickview', function() {
                     var prodUrl = $(this).attr('data-quickview-url');
                     if (prodUrl.length) {

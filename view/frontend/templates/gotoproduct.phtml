@@ -26,7 +26,9 @@
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 ?>
-<?php $product = $block->getProduct(); ?>
+<?php $product = $block->getProduct();
+$cart = $block->getData()
+?>
 <div id="ajax-goto">
     <a class="goto-product" href="<?php echo $product->getUrlModel()->getUrl($product);?>">
         <span><?php echo __('Go to Product'); ?></span>

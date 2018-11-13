@@ -92,7 +92,6 @@ define([
                             cartMessage = message.text;
                         }
                     }
-
                 }
             });
         }
