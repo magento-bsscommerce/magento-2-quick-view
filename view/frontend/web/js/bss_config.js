@@ -1,71 +1,92 @@
 define([
     'jquery',
+    'mage/mage',
     'Bss_Quickview/js/jquery.magnific-popup.min'
 ], function ($) {
+    "use strict";
     $.widget('bss.bss_config', {
-        _create: function () {
-            var isEnabled = this.options.isEnabled;
-            if(isEnabled == 1){
-                this.addQuickviewButton();
-                this.eventListener(this);
-            }
-
+        options: {
+            productUrl: '',
+            buttonText: '',
+            isEnabled: false,
+            baseUrl: '',
+            productImageWrapper: '',
+            productItemInfo: ''
         },
-        eventListener: function ($widget) {
-            var baseUrl = this.options.baseUrl;
-            $('a.mailto').click(function(e){
-                e.preventDefault();
-                window.top.location.href = $(this).attr('href');
-                return true;
-            });
 
-            $(document).ready(function() {
-                $(document).on('click', '.message-success a', function (e) {
+        _create: function () {
+            this.renderButton();
+            this._EventListener();
+        },
+
+        renderButton: function () {
+            var $widget = this,
+                id_product,
+                productImageWrapper = '.' + this.options.productImageWrapper,
+                productItemInfo = '.' + this.options.productItemInfo;
+            if($widget.options.isEnabled == 1){
+                $(productImageWrapper).each(function(){
+                   
+                    if ($(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val() !='') {
+                        id_product = $(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val();
+                    }
+                    if (!id_product) {
+                        id_product = $(this).parents(productItemInfo).find('.price-box').data('product-id');
+                    }
+                    if (id_product) {
+                        $(this).append('<div id="quickview-'+ id_product +'" class="bss-bt-quickview"><a class="bss-quickview" data-quickview-url="'+$widget.options.productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+$widget.options.buttonText+'</span></a></div>');
+                    }
+                })
+                $('body').on('contentUpdated', function () {
+                    $(productImageWrapper).each(function(){
+                   
+                    if ($(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val() !='') {
+                        id_product = $(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val();
+                    }
+                    if (!id_product) {
+                        id_product = $(this).parents(productItemInfo).find('.price-box').data('product-id');
+                    }
+                    var $quickView = $(this).parents(productItemInfo).find('.bss-bt-quickview').data();
+                    if (id_product && !$quickView) {
+                        $(this).append('<div id="quickview-'+ id_product +'" class="bss-bt-quickview"><a class="bss-quickview" data-quickview-url="'+$widget.options.productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+$widget.options.buttonText+'</span></a></div>');
+                    }
+                    $widget._EventListener();
+                })
+                });
+            }
+        },
+
+        _EventListener: function () {
+            var $widget = this;
+            if($widget.options.isEnabled == 1){
+
+                $('a.mailto').click(function(e){
                     e.preventDefault();
-                    window.top.location.href = $(this).attr('href');
+                    window.top.location.href = $(this).attr('href');    
                     return true;
                 });
-                $(document).on('click', '.bss-quickview', function() {
+
+                $('#layer-product-list').on('contentUpdated', function () {
+                    $('.bss-bt-quickview').remove();
+                    $widget.renderButton();
+                });
+
+                $('.bss-quickview').on('click', function() {
                     var prodUrl = $(this).attr('data-quickview-url');
                     if (prodUrl.length) {
                         $widget.openPopup(prodUrl);
                     }
                 });
-                $.ajax({
-                    url: baseUrl + 'bss_quickview/index/updatecart',
-                    method: "POST"
-                });
-            });
+            }
+        },
 
-            $('#layer-product-list').on('contentUpdated', function () {
-                $('.bss-bt-quickview').remove();
-                $widget.addQuickviewButton();
-            });
-        },
-        addQuickviewButton: function () {
-            var productImageWrapper = '.' + this.options.productImageWrapper;
-            var productItemInfo = '.' + this.options.productItemInfo;
-            var productUrl = this.options.productUrl;
-            var buttonText = this.options.buttonText;
-            $(productImageWrapper).each(function(){
-                if ($(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val() !='') {
-                    id_product = $(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val();
-                }
-                if (!id_product) {
-                    id_product = $(this).parents(productItemInfo).find('.price-box').data('product-id');
-                }
-                if (id_product) {
-                    $(this).append('<div id="quickview"><a class="bss-quickview" data-quickview-url="'+productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+buttonText+'</span></a></div>');
-                }
-            })
-        },
         openPopup: function (prodUrl) {
-            var baseUrl = this.options.baseUrl;
+            var $widget = this,
+                url = $widget.options.baseUrl + 'bss_quickview/index/updatecart';
 
             if (!prodUrl.length) {
                 return false;
             }
-            var url = baseUrl + 'bss_quickview/index/updatecart';
 
             $.magnificPopup.open({
                 items: {
