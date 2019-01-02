@@ -37,22 +37,6 @@ define([
                         $(this).append('<div id="quickview-'+ id_product +'" class="bss-bt-quickview"><a class="bss-quickview" data-quickview-url="'+$widget.options.productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+$widget.options.buttonText+'</span></a></div>');
                     }
                 })
-                $('body').on('contentUpdated', function () {
-                    $(productImageWrapper).each(function(){
-                   
-                    if ($(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val() !='') {
-                        id_product = $(this).parents(productItemInfo).find('.actions-primary input[name="product"]').val();
-                    }
-                    if (!id_product) {
-                        id_product = $(this).parents(productItemInfo).find('.price-box').data('product-id');
-                    }
-                    var $quickView = $(this).parents(productItemInfo).find('.bss-bt-quickview').data();
-                    if (id_product && !$quickView) {
-                        $(this).append('<div id="quickview-'+ id_product +'" class="bss-bt-quickview"><a class="bss-quickview" data-quickview-url="'+$widget.options.productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+$widget.options.buttonText+'</span></a></div>');
-                    }
-                    })
-                    $widget._EventListener();
-                });
             }
         },
 
@@ -71,11 +55,15 @@ define([
                     $widget.renderButton();
                 });
 
-                $('.bss-quickview').on('click', function() {
+                $(document).on('click','.bss-quickview', function() {
                     var prodUrl = $(this).attr('data-quickview-url');
                     if (prodUrl.length) {
                         $widget.openPopup(prodUrl);
                     }
+                });
+                $('body').on('contentUpdated', function () {
+                    $('.bss-bt-quickview').remove();
+                    $widget.renderButton();
                 });
             }
         },
