@@ -50,8 +50,8 @@ define([
                     if (id_product && !$quickView) {
                         $(this).append('<div id="quickview-'+ id_product +'" class="bss-bt-quickview"><a class="bss-quickview" data-quickview-url="'+$widget.options.productUrl+'id/'+ id_product +'" href="javascript:void(0);" ><span>'+$widget.options.buttonText+'</span></a></div>');
                     }
+                    })
                     $widget._EventListener();
-                })
                 });
             }
         },
