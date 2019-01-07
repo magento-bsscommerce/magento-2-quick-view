@@ -43,22 +43,22 @@ class AddUpdateHandlesObserver implements ObserverInterface
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
      */
-    public $scopeConfig;
+    protected $scopeConfig;
 
     /**
      * @var \Magento\Framework\App\Request\Http
      */
-    public $request;
+    protected $request;
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
-    public $storeManager;
+    protected $storeManager;
 
     /**
      * @var ProductRepositoryInterface
      */
-    public $productRepository;
+    protected $productRepository;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -109,7 +109,12 @@ class AddUpdateHandlesObserver implements ObserverInterface
 
             $layout->getUpdate()->addHandle('bss_quickview_catalog_product_view_type_' . $productType);
         }
-        
+        $this->quickViewRemove($layout);
+        return $this;
+    }
+
+    protected function quickViewRemove($layout)
+    {
         $removeTab = $this->scopeConfig->getValue(
             self::XML_PATH_QUICKVIEW_REMOVE_TAB,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -128,11 +133,9 @@ class AddUpdateHandlesObserver implements ObserverInterface
             self::XML_PATH_QUICKVIEW_REMOVE_ADDTO_WISHLIST,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
-        $this->removeAddToWishList(
-            $removeAddToWishList,
-            $layout,
-            $observer
-        );
+        if ($removeAddToWishList == 0) {
+            $layout->getUpdate()->addHandle('bss_quickview_remove_addtowishlist');
+        }
         $removeReviews = $this->scopeConfig->getValue(
             self::XML_PATH_QUICKVIEW_REMOVE_REVIEWS,
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -160,16 +163,6 @@ class AddUpdateHandlesObserver implements ObserverInterface
         );
         if ($removeProductInfoMailto == 0) {
             $layout->getUpdate()->addHandle('bss_quickview_remove_product_info_mailto');
-        }
-        return $this;
-    }
-    private function removeAddToWishList(
-        $removeAddToWishList,
-        $layout,
-        $observer
-    ) {
-        if ($removeAddToWishList == 0) {
-            $layout->getUpdate()->addHandle('bss_quickview_remove_addtowishlist');
         }
     }
 }

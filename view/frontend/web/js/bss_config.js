@@ -50,7 +50,7 @@ define([
                     return true;
                 });
 
-                $('#layer-product-list').on('contentUpdated', function () {
+                $('body, #layer-product-list').on('contentUpdated', function () {
                     $('.bss-bt-quickview').remove();
                     $widget.renderButton();
                 });
@@ -60,10 +60,6 @@ define([
                     if (prodUrl.length) {
                         $widget.openPopup(prodUrl);
                     }
-                });
-                $('body').on('contentUpdated', function () {
-                    $('.bss-bt-quickview').remove();
-                    $widget.renderButton();
                 });
             }
         },
