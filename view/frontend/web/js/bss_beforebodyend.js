@@ -41,7 +41,7 @@ define([
 
                 $('.reviews-actions a').attr('target', '_parent');
                 $('.product-social-links a').attr('target', '_parent');
-                $('a').on('click',function(e){
+                $(document).on('click','a', function(e){
                     e.preventDefault();
                     if ($(this).attr('data-post')) {
                         qty = 0;
