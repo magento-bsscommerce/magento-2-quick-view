@@ -17,9 +17,11 @@
  */
 namespace Bss\Quickview\Controller\Catalog\Product;
 
-use Magento\Framework\App\Action\Context;
-use Magento\Framework\View\Result\PageFactory;
-
+/**
+ * Class Add
+ *
+ * @package Bss\Quickview\Controller\Catalog\Product
+ */
 class Add extends \Magento\Catalog\Controller\Product\Compare\Add
 {
     /**
@@ -27,7 +29,13 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
      */
     protected $myObjectManager;
 
-	public function execute()
+    /**
+     * Add product
+     *
+     * @return \Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function execute()
     {
         $this->myObjectManager = $this->_objectManager;
         $resultRedirect = $this->resultRedirectFactory->create();
@@ -54,10 +62,9 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
             $this->myObjectManager->get('Magento\Catalog\Helper\Product\Compare')->calculate();
         }
         $params = $this->getRequest()->getParams();
-	  	if (isset($params['bssquickview']) && $params['bssquickview'] == 1) {
+        if (isset($params['bssquickview']) && $params['bssquickview'] == 1) {
             return $resultRedirect->setPath($product->getUrlModel()->getUrl($product));
-	  	}
+        }
         return $resultRedirect->setRefererOrBaseUrl();
     }
-
 }

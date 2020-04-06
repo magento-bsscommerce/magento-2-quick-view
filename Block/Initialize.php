@@ -45,6 +45,7 @@ class Initialize extends \Magento\Framework\View\Element\Template
      * Returns config
      *
      * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getConfig()
     {
@@ -62,6 +63,7 @@ class Initialize extends \Magento\Framework\View\Element\Template
      *
      * @codeCoverageIgnore
      * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getBaseUrl()
     {
