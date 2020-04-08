@@ -17,6 +17,8 @@
  */
 namespace Bss\Quickview\Block;
 
+use Exception;
+
 /**
  * Quickview Initialize block
  */
@@ -73,6 +75,10 @@ class Initialize extends \Magento\Framework\View\Element\Template
      */
     public function getBaseUrl()
     {
-        return $this->_storeManager->getStore()->getBaseUrl();
+        try {
+            return $this->_storeManager->getStore()->getBaseUrl();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }
