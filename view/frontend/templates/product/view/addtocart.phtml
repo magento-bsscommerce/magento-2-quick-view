@@ -15,6 +15,7 @@
  * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
+/** @var $block \Bss\Quickview\Block\Product\View */
 ?>
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
@@ -32,7 +33,7 @@
                             maxlength="12"
                             value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
                             title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
-                            data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                            data-validate="<?php echo $block->escapeHtml($block->jsonEncoderQuantityValidators()) ?>"
                         />
                     </div>
                 </div>
