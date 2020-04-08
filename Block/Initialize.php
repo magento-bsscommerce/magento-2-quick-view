@@ -54,7 +54,13 @@ class Initialize extends \Magento\Framework\View\Element\Template
         ];
     }
 
-    public function getHelper() {
+    /**
+     * Class Helper::Data
+     *
+     * @return \Bss\QuickView\Helper\Data
+     */
+    public function getHelper()
+    {
         return $this->helper;
     }
 

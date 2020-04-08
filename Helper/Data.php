@@ -63,7 +63,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getBtnTextColor()
     {
-        $color = $this->scopeConfig->getValue('bss_quickview/success_popup_design/button_text_color', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $color = $this->scopeConfig->getValue(
+            'bss_quickview/success_popup_design/button_text_color',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
 
         $color = ($color == '') ? '' : $color;
         return $color;
@@ -76,7 +79,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getBtnBackground()
     {
-        $backGround = $this->scopeConfig->getValue('bss_quickview/success_popup_design/background_color', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $backGround = $this->scopeConfig->getValue(
+            'bss_quickview/success_popup_design/background_color',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
 
         $backGround = ($backGround == '') ? '' : $backGround;
         return $backGround;
@@ -89,7 +95,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getButtonText()
     {
-        $buttonText = $this->scopeConfig->getValue('bss_quickview/success_popup_design/button_text', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $buttonText = $this->scopeConfig->getValue(
+            'bss_quickview/success_popup_design/button_text',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
 
         $buttonText = ($buttonText == '') ? __('Quick View') : $buttonText;
         return $buttonText;
@@ -102,7 +111,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function enabled()
     {
-        $isEnabled = $this->scopeConfig->getValue('bss_quickview/general/enable_product_listing', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $isEnabled = $this->scopeConfig->getValue(
+            'bss_quickview/general/enable_product_listing',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
         $isEnabled = ($isEnabled == '') ? '' : $isEnabled;
         return $isEnabled;
     }
@@ -164,7 +176,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getSkuTemplate()
     {
-        $this->quickviewOptions = $this->scopeConfig->getValue('bss_quickview', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $this->quickviewOptions = $this->scopeConfig->getValue(
+            'bss_quickview',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
         $removeSku = $this->quickviewOptions['general']['remove_sku'];
         if (!$removeSku) {
             return 'Magento_Catalog::product/view/attribute.phtml';
@@ -180,7 +195,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCustomCSS()
     {
-        $this->quickviewOptions = $this->scopeConfig->getValue('bss_quickview', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $this->quickviewOptions = $this->scopeConfig->getValue(
+            'bss_quickview',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
         return trim($this->quickviewOptions['general']['custom_css']);
     }
 
@@ -191,7 +209,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getCloseSeconds()
     {
-        $this->quickviewOptions = $this->scopeConfig->getValue('bss_quickview', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $this->quickviewOptions = $this->scopeConfig->getValue(
+            'bss_quickview',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
         return trim($this->quickviewOptions['general']['close_quickview']);
     }
 

@@ -15,9 +15,15 @@
  * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * @var \Bss\Quickview\Block\Initialize $block
+ */
 ?>
 <?php $product = $block->getProduct(); ?>
-<?php 
+<?php
     $helper = $block->getHelper();
     $removeReview = $helper->getRemoveReview();
     $removeMoreInfo = $helper->getRemoveMoreInfo();

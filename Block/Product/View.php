@@ -3,7 +3,6 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-
 namespace Bss\Quickview\Block\Product;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
