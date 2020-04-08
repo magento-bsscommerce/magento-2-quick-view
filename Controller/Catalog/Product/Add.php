@@ -39,10 +39,10 @@ use Magento\Store\Model\StoreManagerInterface;
  * Class Add
  *
  * @package Bss\Quickview\Controller\Catalog\Product
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Add extends \Magento\Catalog\Controller\Product\Compare\Add
 {
-    protected $myObjectManager;
     /**
      * @var Escaper
      */
