@@ -121,7 +121,7 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
         if ($productId && ($this->_customerVisitor->getId() || $this->_customerSession->isLoggedIn())) {
             $storeId = $this->_storeManager->getStore()->getId();
             try {
-                $product = $this->productRepository->getById(90, false, $storeId);
+                $product = $this->productRepository->getById($productId, false, $storeId);
             } catch (Exception $e) {
                 $this->messageManager->addErrorMessage(__('The product that was requested doesn\'t exist. Verify the product and try again.'));
                 return $resultRedirect->setRefererOrBaseUrl();
