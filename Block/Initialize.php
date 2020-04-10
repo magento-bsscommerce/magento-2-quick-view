@@ -17,6 +17,8 @@
  */
 namespace Bss\Quickview\Block;
 
+use Exception;
+
 /**
  * Quickview Initialize block
  */
@@ -45,6 +47,7 @@ class Initialize extends \Magento\Framework\View\Element\Template
      * Returns config
      *
      * @return array
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getConfig()
     {
@@ -53,7 +56,13 @@ class Initialize extends \Magento\Framework\View\Element\Template
         ];
     }
 
-    public function getHelper() {
+    /**
+     * Class Helper::Data
+     *
+     * @return \Bss\QuickView\Helper\Data
+     */
+    public function getHelper()
+    {
         return $this->helper;
     }
 
@@ -62,9 +71,14 @@ class Initialize extends \Magento\Framework\View\Element\Template
      *
      * @codeCoverageIgnore
      * @return string
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getBaseUrl()
     {
-        return $this->_storeManager->getStore()->getBaseUrl();
+        try {
+            return $this->_storeManager->getStore()->getBaseUrl();
+        } catch (Exception $e) {
+            return null;
+        }
     }
 }

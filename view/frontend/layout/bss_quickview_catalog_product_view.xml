@@ -37,15 +37,9 @@
         <referenceContainer name="before.body.end">
             <block class="Bss\Quickview\Block\Initialize" name="bss.quickview.beforebodyend" template="Bss_Quickview::beforebodyend.phtml" />
         </referenceContainer>
-        <referenceBlock name="product.info.addtocart">
-            <action method="setTemplate">
-                <argument name="template" xsi:type="string">Bss_Quickview::product/view/addtocart.phtml</argument>
-            </action>
+        <referenceBlock name="product.info.addtocart" class="Bss\Quickview\Block\Product\View" template="Bss_Quickview::product/view/addtocart.phtml">
         </referenceBlock>
-        <referenceBlock name="product.info.addtocart.additional">
-            <action method="setTemplate">
-                <argument name="template" xsi:type="string">Bss_Quickview::product/view/addtocart.phtml</argument>
-            </action>
+        <referenceBlock name="product.info.addtocart.additional" class="Bss\Quickview\Block\Product\View" template="Bss_Quickview::product/view/addtocart.phtml">
         </referenceBlock>
     </body>
 </page>

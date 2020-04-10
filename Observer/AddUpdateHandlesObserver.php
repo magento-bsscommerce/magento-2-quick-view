@@ -17,10 +17,16 @@
  */
 namespace Bss\Quickview\Observer;
 
-use Magento\Framework\Event\ObserverInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\View\Layout;
 
+/**
+ * Class AddUpdateHandlesObserver
+ *
+ * @package Bss\Quickview\Observer
+ */
 class AddUpdateHandlesObserver implements ObserverInterface
 {
     const XML_PATH_QUICKVIEW_REMOVE_TAB = 'bss_quickview/general/remove_product_tab';
@@ -67,7 +73,7 @@ class AddUpdateHandlesObserver implements ObserverInterface
         $this->storeManager = $storeManager;
         $this->productRepository = $productRepository;
     }
-    
+
     /**
      * Add New Layout handle
      *
@@ -78,7 +84,7 @@ class AddUpdateHandlesObserver implements ObserverInterface
     {
         $layout = $observer->getData('layout');
         $fullActionName = $observer->getData('full_action_name');
-        
+
         if ($fullActionName != 'bss_quickview_catalog_product_view') {
             return $this;
         }
@@ -103,6 +109,11 @@ class AddUpdateHandlesObserver implements ObserverInterface
         return $this;
     }
 
+    /**
+     * Quick view remove
+     *
+     * @param Layout $layout
+     */
     protected function quickViewRemove($layout)
     {
         $removeTab = $this->scopeConfig->getValue(

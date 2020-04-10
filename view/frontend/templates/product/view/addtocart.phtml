@@ -15,6 +15,12 @@
  * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * @var \Bss\Quickview\Block\Product\View $block
+ */
 ?>
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
@@ -25,14 +31,14 @@
                 <div class="field qty">
                     <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
                     <div class="control">
-                        <input 
+                        <input
                             type="number"
                             name="qty"
                             id="qty"
                             maxlength="12"
                             value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
                             title="<?php /* @escapeNotVerified */ echo __('Qty') ?>" class="input-text qty"
-                            data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                            data-validate="<?php echo $block->escapeHtml($block->jsonEncoderQuantityValidators()) ?>"
                         />
                     </div>
                 </div>

@@ -17,8 +17,18 @@
  */
 namespace Bss\Quickview\Controller\Index;
 
+/**
+ * Class Updatecart
+ *
+ * @package Bss\Quickview\Controller\Index
+ */
 class Updatecart extends \Magento\Framework\App\Action\Action
 {
+    /**
+     * Update cart
+     *
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     */
     public function execute()
     {
         if (!$this->getRequest()->isAjax()) {
