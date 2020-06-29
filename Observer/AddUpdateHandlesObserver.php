@@ -15,6 +15,7 @@
  * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
+
 namespace Bss\Quickview\Observer;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -67,7 +68,8 @@ class AddUpdateHandlesObserver implements ObserverInterface
         \Magento\Framework\App\Request\Http $request,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         ProductRepositoryInterface $productRepository
-    ) {
+    )
+    {
         $this->scopeConfig = $scopeConfig;
         $this->request = $request;
         $this->storeManager = $storeManager;
@@ -89,7 +91,7 @@ class AddUpdateHandlesObserver implements ObserverInterface
             return $this;
         }
 
-        $productId= $this->request->getParam('id');
+        $productId = $this->request->getParam('id');
         if (isset($productId)) {
             try {
                 $product = $this->productRepository->getById(
@@ -158,12 +160,6 @@ class AddUpdateHandlesObserver implements ObserverInterface
         if ($removeProductUpsell == 0) {
             $layout->getUpdate()->addHandle('bss_quickview_remove_product_upsell');
         }
-        $removeProductInfoMailto = $this->scopeConfig->getValue(
-            self::XML_PATH_QUICKVIEW_REMOVE_PRODUCT_INFOR_MAILTO,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        if ($removeProductInfoMailto == 0) {
-            $layout->getUpdate()->addHandle('bss_quickview_remove_product_info_mailto');
-        }
+        $layout->getUpdate()->addHandle('bss_quickview_product_info_mailto');
     }
 }
