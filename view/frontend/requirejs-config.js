@@ -27,5 +27,12 @@ var config = {
         magnificPopup: {
             deps: ['jquery']
         }
+    },
+    config : {
+        mixins: {
+            'Magento_Catalog/js/catalog-add-to-cart': {
+                'Bss_Quickview/js/add-to-cart-mixin': true
+            }
+        }
     }
 };
