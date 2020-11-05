@@ -24,7 +24,6 @@ use Magento\Catalog\Model\Product\Compare\ItemFactory;
 use Magento\Catalog\Model\Product\Compare\ListCompare;
 use Magento\Catalog\Model\ResourceModel\Product\Compare\Item\CollectionFactory;
 use Magento\Catalog\Model\Session;
-use Magento\Catalog\ViewModel\Product\Checker\AddToCompareAvailability;
 use Magento\Customer\Model\Visitor;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\Result\Redirect;
@@ -67,7 +66,6 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
      * @param Validator $formKeyValidator
      * @param PageFactory $resultPageFactory
      * @param ProductRepositoryInterface $productRepository
-     * @param AddToCompareAvailability|null $compareAvailability
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
@@ -83,8 +81,7 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
         StoreManagerInterface $storeManager,
         Validator $formKeyValidator,
         PageFactory $resultPageFactory,
-        ProductRepositoryInterface $productRepository,
-        AddToCompareAvailability $compareAvailability = null
+        ProductRepositoryInterface $productRepository
     ) {
         $this->compare = $compare;
         $this->escaper = $escaper;
@@ -99,8 +96,7 @@ class Add extends \Magento\Catalog\Controller\Product\Compare\Add
             $storeManager,
             $formKeyValidator,
             $resultPageFactory,
-            $productRepository,
-            $compareAvailability
+            $productRepository
         );
     }
 
