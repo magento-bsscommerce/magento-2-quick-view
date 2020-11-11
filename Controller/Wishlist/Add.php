@@ -50,6 +50,10 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
      * @var Validator
      */
     protected $formKeyValidator;
+    /**
+     * @var \Magento\Wishlist\Helper\Data
+     */
+    protected $data;
 
     /**
      * @param Action\Context $context
@@ -57,18 +61,21 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
      * @param \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider
      * @param ProductRepositoryInterface $productRepository
      * @param Validator $formKeyValidator
+     * @param \Magento\Wishlist\Helper\Data $data
      */
     public function __construct(
         Action\Context $context,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Wishlist\Controller\WishlistProviderInterface $wishlistProvider,
         ProductRepositoryInterface $productRepository,
-        Validator $formKeyValidator
+        Validator $formKeyValidator,
+        \Magento\Wishlist\Helper\Data $data
     ) {
         $this->_customerSession = $customerSession;
         $this->wishlistProvider = $wishlistProvider;
         $this->productRepository = $productRepository;
         $this->formKeyValidator = $formKeyValidator;
+        $this->data = $data;
         parent::__construct($context);
     }
 
@@ -143,7 +150,7 @@ class Add extends \Magento\Wishlist\Controller\AbstractIndex
                 $referer = $this->_redirect->getRefererUrl();
             }
 
-            $this->_objectManager->get(\Magento\Wishlist\Helper\Data::class)->calculate();
+            $this->data->calculate();
 
             $this->messageManager->addComplexSuccessMessage(
                 'addProductSuccessMessage',

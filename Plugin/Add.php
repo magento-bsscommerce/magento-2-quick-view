@@ -22,9 +22,8 @@ use Magento\Framework\App\Action\Context;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
- * Class TrueFalse
- *
- * @package Bss\Quickview\Model\Config\Source
+ * Class Add
+ * @package Bss\Quickview\Plugin
  */
 class Add
 {
@@ -35,15 +34,15 @@ class Add
     /**
      * @var Context
      */
-    private $context;
+    protected $context;
     /**
      * @var StoreManagerInterface
      */
-    private $storeManager;
+    protected $storeManager;
     /**
      * @var ProductRepositoryInterface
      */
-    private $productRepository;
+    protected $productRepository;
 
     /**
      * Add constructor.
