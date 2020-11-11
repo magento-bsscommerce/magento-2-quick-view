@@ -19,6 +19,7 @@ namespace Bss\Quickview\Plugin;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\StoreManagerInterface;
 
 /**
@@ -74,11 +75,17 @@ class Add
         $resultRedirect = $this->redirectFactory->create();
         $productId = (int)$this->context->getRequest()->getParam('product');
         $storeId = $this->storeManager->getStore()->getId();
-        $product = $this->productRepository->getById($productId, false, $storeId);
-
-        $params = $this->context->getRequest()->getParams();
-        if (isset($params['bssquickview']) && $params['bssquickview'] == 1) {
-            return $resultRedirect->setPath($product->getUrlModel()->getUrl($product));
+        try {
+            $product = $this->productRepository->getById($productId, false, $storeId);
+        } catch (NoSuchEntityException $e) {
+            $product = null;
+        }
+        if ($product)
+        {
+            $params = $this->context->getRequest()->getParams();
+            if (isset($params['bssquickview']) && $params['bssquickview'] == 1) {
+                return $resultRedirect->setPath($product->getUrlModel()->getUrl($product));
+            }
         }
         return $result;
     }
