@@ -17,7 +17,6 @@
 var config = {
     map: {
         '*': {
-            bss_fancybox: 'Bss_Quickview/js/jquery.fancybox',
             bss_config: 'Bss_Quickview/js/bss_config',
             magnificPopup: 'Bss_Quickview/js/jquery.magnific-popup.min',
             bss_tocart: 'Bss_Quickview/js/bss_tocart'
