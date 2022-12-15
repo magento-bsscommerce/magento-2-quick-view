@@ -12,7 +12,7 @@
  * @category   BSS
  * @package    Bss_Quickview
  * @author     Extension Team
- * @copyright  Copyright (c) 2019-2020 BSS Commerce Co. ( http://bsscommerce.com )
+ * @copyright  Copyright (c) 2019-2022 BSS Commerce Co. ( http://bsscommerce.com )
  * @license    http://bsscommerce.com/Bss-Commerce-License.txt
  */
 namespace Bss\Quickview\Plugin;
@@ -24,22 +24,24 @@ use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * Class Add
- * @package Bss\Quickview\Plugin
  */
-class Add
+class SetRedirectUrlWhenAddCompareProduct
 {
     /**
      * @var \Magento\Framework\Controller\Result\RedirectFactory
      */
     protected $redirectFactory;
+
     /**
      * @var Context
      */
     protected $context;
+
     /**
      * @var StoreManagerInterface
      */
     protected $storeManager;
+
     /**
      * @var ProductRepositoryInterface
      */
@@ -47,6 +49,7 @@ class Add
 
     /**
      * Add constructor.
+     *
      * @param \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory
      * @param Context $context
      * @param StoreManagerInterface $storeManager
@@ -54,9 +57,9 @@ class Add
      */
     public function __construct(
         \Magento\Framework\Controller\Result\RedirectFactory $redirectFactory,
-        Context $context,
-        StoreManagerInterface $storeManager,
-        ProductRepositoryInterface $productRepository
+        Context                                              $context,
+        StoreManagerInterface                                $storeManager,
+        ProductRepositoryInterface                           $productRepository
     ) {
         $this->redirectFactory = $redirectFactory;
         $this->context = $context;
@@ -65,13 +68,13 @@ class Add
     }
 
     /**
-     * @param \Magento\Catalog\Controller\Product\Compare\Add $subject
+     * Redirect product detail page when add compare product
+     *
      * @param $result
      * @return \Magento\Framework\Controller\Result\Redirect
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
-    protected function afterExcute(\Magento\Catalog\Controller\Product\Compare\Add $subject, $result)
-    {
+    public function afterExecute($result){
         $resultRedirect = $this->redirectFactory->create();
         $productId = (int)$this->context->getRequest()->getParam('product');
         $storeId = $this->storeManager->getStore()->getId();
@@ -82,10 +85,7 @@ class Add
         }
         if ($product)
         {
-            $params = $this->context->getRequest()->getParams();
-            if (isset($params['bssquickview']) && $params['bssquickview'] == 1) {
-                return $resultRedirect->setPath($product->getUrlModel()->getUrl($product));
-            }
+            return $resultRedirect->setUrl($product->getProductUrl());
         }
         return $result;
     }

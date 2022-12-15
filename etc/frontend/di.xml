@@ -21,4 +21,10 @@
     <type name="Bss\Simpledetailconfigurable\Plugin\Catalog\Controller\Product\View">
         <plugin name="bss_quick_view_sdcp_redirect" type="Bss\Quickview\Plugin\Catalog\Controller\Product\View" sortOrder="10" />
     </type>
+
+    <!--Redirect product detail page when add compare product-->
+    <type name="Magento\Catalog\Controller\Product\Compare\Add">
+        <plugin name="bss_quick_view_product_compare_add" type="Bss\Quickview\Plugin\SetRedirectUrlWhenAddCompareProduct" sortOrder="20" disabled="false" />
+    </type>
+    <!--End-->
 </config>

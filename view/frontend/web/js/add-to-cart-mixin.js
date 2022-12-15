@@ -14,7 +14,9 @@ define([
                     var self = this,
                         productIds = idsResolver(form),
                         formData;
-                    var link = self.element.context.baseURI;
+                    if ('context' in self.element){
+                        var link = self.element.context.baseURI;
+                    }
 
                     $(self.options.minicartSelector).trigger('contentLoading');
                     self.disableAddToCartButton(form);
