@@ -52,7 +52,7 @@ define([
                                 $('body').trigger(self.options.processStop);
                             }
 
-                            if (res.backUrl) {
+                            if (res.backUrl && res.backUrl !== undefined) {
                                 eventData = {
                                     'form': form,
                                     'redirectParameters': []
@@ -67,7 +67,9 @@ define([
                                     parameters.push(eventData.redirectParameters.join('&'));
                                     res.backUrl = parameters.join('#');
                                 }
-                                res.backUrl = link;
+                                if (link !== undefined) {
+                                    res.backUrl = link;
+                                }
                                 self._redirect(res.backUrl);
                                 return;
                             }
